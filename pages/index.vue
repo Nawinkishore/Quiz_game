@@ -11,8 +11,10 @@
     </ul>
       
     <div class="flex justify-center gap-5 mt-10" v-if="currentqn < question.length">
-  <button @click="previousqn()" v-if="currentqn > 0" class="w-auto h-6 px-3 rounded-sm font-thin bg-white">Previous Question</button>
-  <button @click="nextquestion()" v-show="currentqn < question.length - 1"  class=" w-auto h-6 px-3 rounded-sm font-thin bg-white" >Next Question</button>
+  <button  @click="previousqn()" v-if="currentqn > 0 " class="w-auto h-6 px-3 rounded-sm font-thin bg-white"
+    :disabled="question[currentqn].answered">Previous Question</button>
+  <button @click="nextquestion()" v-show="currentqn < question.length - 1"  class=" w-auto h-6 px-3 rounded-sm font-thin bg-white"
+  >Next Question</button>
   <button v-if="currentqn === question.length - 1" @click="finishQuiz()" class="w-auto h-6 px-3 rounded-sm font-thin bg-black text-white">Finish</button>
 </div>
 
@@ -31,27 +33,32 @@
           {
             questionText: 'What is the capital of Japan?',
             choices: ['Beijing', 'Seoul', 'Tokyo', 'Bangkok'],
-            correctAnswer: 2, // Index of the correct choice (Tokyo)
+            correctAnswer: 2,
+            answered:false, // Index of the correct choice (Tokyo)
           },
           {
             questionText: 'Which planet is known as the Red Planet?',
             choices: ['Earth', 'Mars', 'Jupiter', 'Venus'],
-            correctAnswer: 1, // Index of the correct choice (Mars)
+            correctAnswer: 1,
+            answered:false, // Index of the correct choice (Mars)
           },
           {
             questionText: 'What is the largest mammal on Earth?',
             choices: ['Elephant', 'Blue Whale', 'Giraffe', 'Lion'],
-            correctAnswer: 1, // Index of the correct choice (Blue Whale)
+            correctAnswer: 1,
+            answered:false, // Index of the correct choice (Blue Whale)
           },
           {
             questionText: 'What is the square of 9?',
             choices: ['81', '64', '121', '100'],
-            correctAnswer: 0, // Index of the correct choice (81)
+            correctAnswer: 0,
+            answered:false, // Index of the correct choice (81)
           },
           {
             questionText: 'Which programming language is used for web development?',
             choices: ['Java', 'Python', 'C++', 'JavaScript'],
-            correctAnswer: 3, // Index of the correct choice (JavaScript)
+            correctAnswer: 3,
+            answered:false, // Index of the correct choice (JavaScript)
           },
         ],
         currentqn: 0,
@@ -89,7 +96,7 @@
         {
           this.currentqn--;
           this.selectedanswer='';
-          this.selected=true;
+          this.selected=z;
         }
       },
       finishQuiz(){
