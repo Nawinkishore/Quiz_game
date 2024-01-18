@@ -96,7 +96,7 @@
         {
           this.currentqn--;
           this.selectedanswer='';
-          this.selected=z;
+          this.selected='';
         }
       },
       finishQuiz(){
