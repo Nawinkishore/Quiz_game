@@ -13,7 +13,7 @@ router.get('/',(req,res)=>{
                 message:"There was a problem"
             });
         }
-        let list = result.map(item =>item.sentence);
+        let list = result;
         return res.json({
             success:true,
             message:"successfully created",
