@@ -2,8 +2,12 @@
   <div v-if="isLoading" class="h-screen w-full bg-yellow-300">
     <!--   -->
     <div v-if="currentqn < question.length">
-      <div class="text-center p-5 font-bold text-2xl"><h1>QUIZ GAME</h1></div>
-      <p class="text-center mt-5 font-extrabold text-red-600">
+      <div class="text-center p-5 font-bold text-2xl text-white">
+        <h1 class="shadow-md p-5 shadow-black">QUIZ GAME</h1>
+      </div>
+      <p
+        class="text-center mt-5 font-extrabold underline decoration-4 decoration-white underline-offset-8 text-xl"
+      >
         {{ question[currentqn].sentence }}
       </p>
     </div>
@@ -14,7 +18,13 @@
         class="flex justify-center"
       >
         <button
-          class="mt-10 cursor-pointer text-blue-600 hover:text-white font-extrabold"
+          class="w-[300px] hover:text-white font-extrabold mt-10 cursor-pointer transition ease-in-out delay-150 bg-blue-500 text-white p-3 rounded-xl hover:scale-110 duration-300"
+          :class="{
+            '!bg-green-500 w-max h-fit p-5 rounded-md':
+              index === correctIndexAnswer,
+            '!bg-red-500 w-max h-fit p-5 rounded-md text-white':
+              selected && index == !correctIndexAnswer,
+          }"
           @click="checkanswer(index)"
           :disabled="selected"
         >
@@ -23,22 +33,11 @@
       </li>
     </ul>
 
-    <div
-      class="flex justify-center gap-5 mt-10"
-      v-if="currentqn < question.length"
-    >
-      <button
-        @click="previousqn()"
-        v-if="currentqn > 0"
-        class="w-auto h-6 px-3 rounded-sm font-thin bg-white"
-        :disabled="question[currentqn].answered"
-      >
-        Previous Question
-      </button>
+    <div class="flex justify-center gap-5 mt-10">
       <button
         @click="nextquestion()"
         v-show="currentqn < question.length - 1"
-        class="w-auto h-6 px-3 rounded-sm font-thin bg-white"
+        class="w-auto h-6 px-3 rounded-sm font-thin bg-white hover:transition ease-in-out hover:scale-110 delay-150 hover:duration-300"
       >
         Next Question
       </button>
@@ -51,8 +50,19 @@
       </button>
     </div>
 
-    <p class="text-center mt-5">{{ selectedanswer }}</p>
-    <p class="text-center">Your score : {{ correct }}</p>
+    <p
+      class="text-center mt-5 mx-auto"
+      :class="{
+        'bg-green-500 w-max h-fit p-2 text-white ':
+          selectedanswer === 'Correct',
+        'bg-red-500 w-max h-fit p-2 text-white': selectedanswer === 'Incorrect',
+      }"
+    >
+      {{ selectedanswer }}
+    </p>
+    <p class="text-center text-blue-500">
+      Your score : <span class="text-black">{{ correct }}</span>
+    </p>
     <!-- <p class="text-center ">Total question : {{ total }}</p> -->
   </div>
 </template>
@@ -68,6 +78,8 @@ export default {
       correct: 0,
       selected: false,
       isLoading: false,
+      correctIndexAnswer: null,
+      isClicks: false,
     };
   },
   mounted() {
@@ -86,24 +98,27 @@ export default {
       if (this.question[this.currentqn].options[index].isCorrect == 1) {
         this.selectedanswer = "Correct";
         this.correct++;
-        this.selected=true;
+        this.selected = true;
+        this.correctIndexAnswer = index;
       } else {
-        this.selectedanswer="Incorrect";
-        this.selected=true;
+        this.selectedanswer = "Incorrect";
+        this.selected = true;
+        this.correctIndexAnswer = null;
       }
+      this.isClicks = true;
     },
     nextquestion() {
-      this.currentqn++;
-      this.selectedanswer = "";
-      this.selected = false;
-    },
-    previousqn() {
-      if (this.currentqn > 0) {
-        this.currentqn--;
+      if (this.isClicks == true) {
+        this.currentqn++;
         this.selectedanswer = "";
-        this.selected = "";
+        this.selected = false;
+        this.correctIndexAnswer = "";
+      } else {
+        alert("Please select any options");
       }
+      this.isClicks = false;
     },
+
     finishQuiz() {
       alert("Quiz finished" + "Your score :" + this.correct);
     },
