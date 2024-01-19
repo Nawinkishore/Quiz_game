@@ -2,9 +2,9 @@
     <div class=" h-screen w-full bg-yellow-300">
     <div v-if="currentqn < question.length" >
       <div class="text-center p-5  font-bold text-2xl"><h1>QUIZ GAME</h1></div>
-      <p class="text-center mt-5 font-extrabold text-red-600">{{ question}}</p>
+      <p class="text-center mt-5 font-extrabold text-red-600">{{question}}</p>
     </div>
-    <ul>
+    <!-- <ul>
       <li v-for="(choice, index) in question[currentqn].choices" :key="index" class="flex justify-center" >
         <button class="mt-10 cursor-pointer text-blue-600  hover:text-white font-extrabold" @click="checkanswer(index)" :disabled ="selected" >{{ choice }}</button>
       </li>
@@ -20,8 +20,8 @@
 
     
     <p class="text-center mt-5">{{ selectedanswer }}</p>
-    <!-- <p class="text-center">Your score : {{ correct }}</p> -->
-    <p class="text-center ">Total question : {{ total }}</p>
+    <p class="text-center">Your score : {{ correct }}</p> -->
+    <!-- <p class="text-center ">Total question : {{ total }}</p> -->
   </div>
   </template>
 
@@ -38,13 +38,13 @@
       };
     },
     mounted(){
-      this.getquestion();
+      this.getquestion();   
     },
     methods: {
       getquestion(){
         this.$http.$get('/api/').then((res)=>{
           console.log('API response :',res);
-          this.question = res.list;
+          this.question=res.list;
         });
       },
       checkanswer(index) {
