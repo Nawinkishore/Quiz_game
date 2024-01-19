@@ -13,12 +13,15 @@ router.get('/',(req,res)=>{
                 message:"There was a problem"
             });
         }
-        let list = result;
+        let list = result.map(item=>item.sentence);
         return res.json({
             success:true,
             message:"successfully created",
             list,
         });
     });
+})
+router.get('/',(req, res)=>{
+    // let query = sqlString.format('SELECT 
 })
 export default router;

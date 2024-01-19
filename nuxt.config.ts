@@ -4,9 +4,9 @@ export default ({
   modules: [
     '@nuxtjs/tailwindcss','@nuxt-alt/http',
   ],
-  http:{
-    baseURL: 'https://localhost:5000',
-    credentials:'omit',
-    browserBaseURL: 'https://localhost:5000',
-  }
+  http: {
+    baseURL: "http://localhost:5000",
+    credentials: "omit",
+    browserBaseURL: "http://localhost:5000",
+  },
 });
