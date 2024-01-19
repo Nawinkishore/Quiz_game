@@ -18,11 +18,11 @@
         class="flex justify-center"
       >
         <button
-          class="w-[300px] hover:text-white font-extrabold mt-10 cursor-pointer transition ease-in-out delay-150 bg-blue-500 text-white p-3 rounded-xl hover:scale-110 duration-300"
+          class="w-[300px] bg-blue-500 hover:text-white font-extrabold mt-10 cursor-pointer transition ease-in-out delay-150 text-white p-3 rounded-xl hover:scale-110 duration-300"
           :class="{
-            '!bg-green-500 w-max h-fit p-5 rounded-md':
+            '!bg-green-500 w-full rounded-md':
               index === correctIndexAnswer,
-            '!bg-red-500 w-max h-fit p-5 rounded-md text-white':
+            '!bg-red-500 w-full rounded-md text-white':
               selected && index == !correctIndexAnswer,
           }"
           @click="checkanswer(index)"
