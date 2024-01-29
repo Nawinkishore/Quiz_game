@@ -20,10 +20,10 @@
         <button
           class="w-[300px] bg-blue-500 hover:text-white font-extrabold mt-10 cursor-pointer transition ease-in-out delay-150 text-white p-3 rounded-xl hover:scale-110 duration-300"
           :class="{
-            '!bg-green-500 w-full rounded-md':
-              index === correctIndexAnswer,
-            '!bg-red-500 w-full rounded-md text-white':
-              selected && index == !correctIndexAnswer,
+            '!bg-green-500  rounded-md':
+             isAnswered && choice.isCorrect==1,
+            '!bg-red-500 rounded-md text-white':
+              isAnswered && choice.isCorrect==0,
           }"
           @click="checkanswer(index)"
           :disabled="selected"
@@ -80,6 +80,7 @@ export default {
       isLoading: false,
       correctIndexAnswer: null,
       isClicks: false,
+      isAnswered: false,
     };
   },
   mounted() {
@@ -99,13 +100,14 @@ export default {
         this.selectedanswer = "Correct";
         this.correct++;
         this.selected = true;
-        this.correctIndexAnswer = index;
+        // this.correctIndexAnswer = index;
       } else {
         this.selectedanswer = "Incorrect";
         this.selected = true;
-        this.correctIndexAnswer = null;
+        // this.correctIndexAnswer = null;
       }
       this.isClicks = true;
+      this.isAnswered = true;
     },
     nextquestion() {
       if (this.isClicks == true) {
@@ -113,6 +115,7 @@ export default {
         this.selectedanswer = "";
         this.selected = false;
         this.correctIndexAnswer = "";
+        this.isAnswered = false;
       } else {
         alert("Please select any options");
       }
